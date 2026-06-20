@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>华体会 · 资料索引与知识门户</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f8fb;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1a2e3b;
+      line-height: 1.6;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1120px;
+      width: 100%;
+    }
+
+    /* Header / 标识区 */
+    .site-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-bottom: 1.8rem;
+      border-bottom: 1px solid #cfe2ed;
+      margin-bottom: 2.8rem;
+    }
+
+    .site-header h1 {
+      font-size: 1.9rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #0d7377, #2ea3b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .site-header .meta {
+      font-size: 0.9rem;
+      color: #3d6b7a;
+      background: #e6f0f5;
+      padding: 0.3rem 0.9rem;
+      border-radius: 24px;
+    }
+
+    /* 网格卡片 —— 目录感知布局 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(13, 115, 119, 0.06), 0 6px 18px rgba(0, 30, 40, 0.04);
+      transition: all 0.2s ease;
+      border: 1px solid #e5f0f5;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(13, 115, 119, 0.10);
+      border-color: #b8d9e5;
+    }
+
+    .card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+      display: inline-block;
+      background: #dceef5;
+      width: 2.4rem;
+      height: 2.4rem;
+      line-height: 2.4rem;
+      text-align: center;
+      border-radius: 12px;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #0b5b63;
+    }
+
+    .card p, .card ul {
+      font-size: 0.95rem;
+      color: #2b4b57;
+    }
+
+    .card ul {
+      padding-left: 1.1rem;
+      list-style-type: "▹  ";
+    }
+
+    .card ul li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* 说明区 + 提示区 双栏 */
+    .bilingual-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin: 2.2rem 0 2.8rem;
+    }
+
+    .info-block {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.6rem;
+      box-shadow: 0 2px 8px rgba(0, 45, 55, 0.04);
+      border-left: 5px solid #2ea3b0;
+    }
+
+    .info-block h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+      color: #0b5b63;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .info-block p {
+      font-size: 0.96rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .info-block .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.7rem;
+      margin-top: 0.8rem;
+    }
+
+    .tag-list span {
+      background: #e3f2f5;
+      color: #135d68;
+      padding: 0.2rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+    }
+
+    .notice-block {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.6rem;
+      border-left: 5px solid #e9b64b;
+      box-shadow: 0 2px 8px rgba(0, 45, 55, 0.04);
+    }
+
+    .notice-block h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+      color: #8b6f2a;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .notice-block ul {
+      padding-left: 1.2rem;
+      list-style-type: "📌 ";
+    }
+
+    .notice-block ul li {
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      color: #2b4b57;
+    }
+
+    /* 相关信息区 —— FAQ摘要风格 */
+    .related-faq {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 1.8rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid #d6e8f0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .related-faq h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0b5b63;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px dashed #cde1e9;
+      padding-bottom: 0.9rem;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #125a66;
+      margin-bottom: 0.2rem;
+      font-size: 0.98rem;
+    }
+
+    .faq-item p {
+      font-size: 0.9rem;
+      color: #385b66;
+    }
+
+    /* 嵌入链接句子区 */
+    .link-sentence {
+      background: #eef6fa;
+      padding: 1.4rem 1.8rem;
+      border-radius: 40px;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      color: #1a3b44;
+      border: 1px solid #cde1e9;
+    }
+
+    .link-sentence a {
+      color: #0d7377;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 2px solid #6bc1cc;
+      padding-bottom: 0.05rem;
+      transition: 0.15s;
+    }
+
+    .link-sentence a:hover {
+      color: #094c52;
+      border-bottom-color: #094c52;
+    }
+
+    /* footer */
+    .footer {
+      border-top: 1px solid #cfe2ed;
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #4f737e;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 720px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+
+      .site-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+      }
+
+      .bilingual-section {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .grid-cards {
+        gap: 1.2rem;
+      }
+
+      .card {
+        padding: 1.4rem;
+      }
+
+      .related-faq {
+        padding: 1.5rem 1.2rem;
+      }
+
+      .link-sentence {
+        padding: 1rem 1.2rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-header h1 {
+        font-size: 1.6rem;
+      }
+
+      .card h3 {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- 头部 -->
+    <header class="site-header">
+      <h1>❖ 华体会 · 资料整理库</h1>
+      <span class="meta">知识索引 · 信息目录</span>
+    </header>
+
+    <!-- 网格卡片区 —— 目录感布局 -->
+    <div class="grid-cards">
+      <div class="card">
+        <div class="icon">📋</div>
+        <h3>平台档案</h3>
+        <p>品牌背景、运营主体、服务协议摘要及合规信息归类。适用于快速查阅基础资料与版本记录。</p>
+      </div>
+      <div class="card">
+        <div class="icon">📁</div>
+        <h3>功能模块说明</h3>
+        <ul>
+          <li>用户注册与认证路径</li>
+          <li>活动与优惠体系</li>
+          <li>支付与结算方式</li>
+          <li>客服与争议处理</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon">🔐</div>
+        <h3>安全与隐私</h3>
+        <p>数据加密策略、隐私政策摘要、账户保护建议。信息安全管理架构参考。</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧩</div>
+        <h3>集成与对接</h3>
+        <p>API 技术文档（摘要）、第三方工具链、嵌入方案及技术白皮书入口。</p>
+      </div>
+    </div>
+
+    <!-- 说明区 + 提示区 并排 -->
+    <div class="bilingual-section">
+      <div class="info-block">
+        <h2>⛊ 资料说明</h2>
+        <p>本索引页面向信息整理者与调研用户，汇总与<strong>华体会</strong>相关的可公开内容、功能路径及技术资料。所有条目均基于公开信息与通用行业实践整理，供参考与检索。</p>
+        <div class="tag-list">
+          <span># 更新于 2025.04</span>
+          <span># 版本 2.1</span>
+          <span># 通用参考</span>
+        </div>
+        <p style="margin-top: 0.8rem;">如需更完整的操作指引或最新公告，建议以官方渠道为准。相关基础信息可在 <a href="https://official--hth.com" style="color: #0d7377; font-weight: 500; text-decoration: underline;">华体会</a> 平台内进一步核对。</p>
+      </div>
+
+      <div class="notice-block">
+        <h2>📎 提示与建议</h2>
+        <ul>
+          <li>检索前确认资料版本，部分条目可能存在时效性差异。</li>
+          <li>涉及账户或敏感操作时，请优先使用双重验证。</li>
+          <li>活动规则以平台实际展示页面为准，本页仅作摘要分类。</li>
+          <li>技术对接推荐查阅最新 API 变更日志。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 相关信息区 (FAQ 摘要) -->
+    <div class="related-faq">
+      <h2>❔ 相关信息摘要</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <strong>▸ 如何获取平台最新公告？</strong>
+          <p>公告通常发布在消息中心及帮助文档，也可关注官方站内信。建议定期查阅。</p>
+        </div>
+        <div class="faq-item">
+          <strong>▸ 账户保密与数据存储</strong>
+          <p>平台采用传输加密与静态加密，隐私政策中说明了数据保留期限与用户权利。</p>
+        </div>
+        <div class="faq-item">
+          <strong>▸ 是否提供历史资料归档？</strong>
+          <p>部分历史版本可通过文档库或联系客服获取，公开资料索引持续整理中。</p>
+        </div>
+        <div class="faq-item">
+          <strong>▸ 技术文档查阅方式</strong>
+          <p>开发者文档包含接口说明、沙箱环境及错误码参考，可对接技术团队。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 自然嵌入链接的句子 (严格显示“华体会”) -->
+    <div class="link-sentence">
+      ⚡ 本资料索引中所有涉及品牌的信息均以 <a href="https://official--hth.com">华体会</a> 作为原始参考，建议读者结合平台实际界面综合判断。
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+      <span>资料整理 · 仅供信息索引</span>
+      <span>版本 2504 · 目录结构</span>
+    </div>
+  </div>
+</body>
+</html>
