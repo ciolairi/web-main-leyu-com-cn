@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>稳定访问 · ng体育 产品说明页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background: #f2f4f6;
+            color: #1a1e24;
+            line-height: 1.65;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* 卡片通用设计 */
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e9eef2;
+            padding: 2rem 1.8rem;
+            margin-bottom: 1.8rem;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        /* hero 区 */
+        .hero {
+            text-align: center;
+            padding: 2.6rem 1.8rem 2.2rem;
+            background: #ffffff;
+            border-bottom: none;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #0d121b;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #4d5766;
+            max-width: 600px;
+            margin: 0 auto 0.25rem;
+            font-weight: 390;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #eef1f5;
+            border-radius: 30px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.85rem;
+            color: #2e3a4b;
+            border: 1px solid #dce2e9;
+            margin-top: 0.7rem;
+        }
+
+        .tagline {
+            font-size: 0.95rem;
+            color: #56606e;
+            margin-top: 0.8rem;
+            border-top: 1px solid #eef2f6;
+            padding-top: 1.2rem;
+            display: inline-block;
+        }
+
+        /* 摘要 / 说明 */
+        .summary p {
+            font-size: 1.02rem;
+            color: #1e2632;
+            margin-bottom: 1rem;
+        }
+
+        .summary p:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary .highlight {
+            background: #f7f9fb;
+            padding: 1rem 1.4rem;
+            border-radius: 14px;
+            border-left: 4px solid #7889a0;
+            margin: 0.8rem 0;
+            color: #1e2a38;
+        }
+
+        /* 特点网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 0.2rem 0 0.2rem;
+        }
+
+        .feature-item {
+            background: #f8fafc;
+            border-radius: 14px;
+            padding: 1.2rem 1rem;
+            border: 1px solid #e6ecf2;
+            text-align: center;
+        }
+
+        .feature-item .emoji-bg {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .feature-item h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        /* 使用建议  & 场景 */
+        .advice-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .advice-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #edf2f7;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .advice-list li:last-child {
+            border-bottom: none;
+        }
+
+        .advice-list .num {
+            font-weight: 500;
+            color: #7889a0;
+            min-width: 1.8rem;
+        }
+
+        /* 提示 / 可信说明 */
+        .note-box {
+            background: #f6f9fc;
+            border-radius: 16px;
+            padding: 1.3rem 1.6rem;
+            border: 1px solid #dde5ed;
+            margin: 1rem 0 0.4rem;
+        }
+
+        .note-box strong {
+            color: #1a2a3a;
+        }
+
+        /* FAQ 摘要 */
+        .faq-mini {
+            margin-top: 0.2rem;
+        }
+
+        .faq-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eef3f8;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item .q {
+            font-weight: 500;
+            margin-bottom: 0.15rem;
+            color: #1f2a38;
+        }
+
+        .faq-item .a {
+            font-size: 0.95rem;
+            color: #43505e;
+        }
+
+        /* 链接样式 */
+        a {
+            color: #2164a0;
+            text-decoration: none;
+            font-weight: 450;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        a:hover {
+            border-bottom-color: #2164a0;
+        }
+
+        /* 底部 */
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6b7a8a;
+            padding: 1.2rem 0 0.5rem;
+            border-top: 1px solid #dce3eb;
+            margin-top: 1rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.6rem;
+            }
+
+            .card {
+                padding: 1.5rem 1rem;
+                border-radius: 14px;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 卡片 -->
+    <div class="card hero">
+        <h1>产品说明<span style="font-weight: 300; color: #6c7e92;"> · </span>ng体育</h1>
+        <div class="sub">稳定入口 · 页面说明 · 使用参考</div>
+        <div class="badge">面向用户：日常浏览 & 内容查阅</div>
+        <div class="tagline">本篇介绍围绕访问稳定与页面功能整理，供初次了解时参考</div>
+    </div>
+
+    <!-- 摘要卡片：稳定入口说明 -->
+    <div class="card summary">
+        <p><strong>关于 ng体育</strong> — 这是一个信息呈现型的页面站点，主要提供体育相关的资讯、数据与内容模块。从使用角度看，保持一个清晰、可依赖的访问方式，是日常使用的基础。</p>
+        <div class="highlight">
+            ⚡ 稳定入口说明：建议将 <a href="https://m-index-ngsports.com">ng体育</a> 添加至浏览器书签，或通过日常习惯的路径直接访问。页面结构保持统一，便于快速定位所需内容。
+        </div>
+        <p>以下从亮点、使用建议以及常见疑问等角度，整理一份平实的参考说明，帮助你更顺畅地熟悉这个页面。</p>
+    </div>
+
+    <!-- 亮点卡片 -->
+    <div class="card">
+        <h3 style="font-weight: 500; font-size: 1.25rem; margin-bottom: 1.2rem; color: #0d1b2a;">✨ 页面亮点</h3>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <span class="emoji-bg">📋</span>
+                <h4>清晰分区</h4>
+                <p>资讯、数据、导航归类明确，降低浏览成本</p>
+            </div>
+            <div class="feature-item">
+                <span class="emoji-bg">⚡</span>
+                <h4>轻量加载</h4>
+                <p>页面结构精简，内容呈现直接</p>
+            </div>
+            <div class="feature-item">
+                <span class="emoji-bg">🔄</span>
+                <h4>常规更新</h4>
+                <p>内容按节奏调整，保持信息时效</p>
+            </div>
+            <div class="feature-item">
+                <span class="emoji-bg">📱</span>
+                <h4>移动适配</h4>
+                <p>在手机与平板设备上均可正常浏览</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 使用建议卡片 + 场景 -->
+    <div class="card">
+        <h3 style="font-weight: 500; font-size: 1.25rem; margin-bottom: 0.8rem; color: #0d1b2a;">📌 使用建议 & 场景</h3>
+        <ul class="advice-list">
+            <li>
+                <span class="num">1</span>
+                <span><strong>日常查阅</strong> —— 直接访问 <a href="https://m-index-ngsports.com">ng体育</a> 即可看到最新资讯内容，无需额外操作。</span>
+            </li>
+            <li>
+                <span class="num">2</span>
+                <span><strong>信息回顾</strong> —— 页面提供分类入口，方便查找历史信息或特定主题。</span>
+            </li>
+            <li>
+                <span class="num">3</span>
+                <span><strong>网络环境注意</strong> —— 如遇加载缓慢，可检查本地网络或更换时段再试，页面本身访问路径稳定。</span>
+            </li>
+            <li>
+                <span class="num">4</span>
+                <span><strong>功能预期</strong> —— 页面主要承担内容展示角色，不涉及下载、支付或注册要求。</span>
+            </li>
+        </ul>
+
+        <div class="note-box" style="margin-top: 1.6rem;">
+            <strong>🔍 场景参考</strong>：想快速了解最新的体育动态或数据汇总，通过 <a href="https://m-index-ngsports.com">ng体育</a> 进入后可按照顶部或侧边分类浏览。建议熟悉页面布局后，日常使用会更有效率。
+        </div>
+    </div>
+
+    <!-- 可信但克制的访问说明 + FAQ 摘要 -->
+    <div class="card">
+        <h3 style="font-weight: 500; font-size: 1.25rem; margin-bottom: 0.6rem; color: #0d1b2a;">🧾 访问说明 · 常规提示</h3>
+        <p style="margin-bottom: 0.8rem; color: #1e2c3c;">
+            本页面由第三方运营维护，内容仅供用户参考。访问时请确保使用正规渠道，并留意页面所提供的链接与信息来源。
+        </p>
+        <div class="note-box" style="margin-top: 0.2rem;">
+            <strong>✅ 可信基础</strong> —— 页面长期保持同一域名与页面结构，用户可通过书签等方式固定访问路径。<br>
+            <span style="font-size: 0.95rem; display: inline-block; margin-top: 0.3rem;">如发现页面变动或访问异常，建议核对域名是否准确（https://m-index-ngsports.com）。</span>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-mini">
+            <h4 style="font-weight: 500; margin: 1.2rem 0 0.6rem; font-size: 1.05rem;">❓ 常见疑问摘要</h4>
+            <div class="faq-item">
+                <div class="q">页面是否需要登录或注册？</div>
+                <div class="a">不需要。当前页面为公开内容展示，无需任何个人账户即可正常浏览。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">内容更新频率如何？</div>
+                <div class="a">内容会依据实际情况进行更新，未设定固定周期，但整体保持活跃。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">在不同设备上显示效果一致吗？</div>
+                <div class="a">页面针对桌面与移动设备均做了基础适配，但部分复杂布局在较小屏幕上会做简化。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 尾部 -->
+    <div class="footer-note">
+        此页面为产品介绍用途，旨在提供清晰、克制的使用说明。<br>
+        核心入口：<a href="https://m-index-ngsports.com" style="border-bottom: 1px solid #b7c4d2;">ng体育</a> · 信息整理于日常版本
+    </div>
+</div>
+</body>
+</html>
